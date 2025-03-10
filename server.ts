@@ -2,8 +2,11 @@ import express from "express";
 
 const app = express();
 
-app.get("/", (req, res) => {
-  res.json({message: "Hello, Node"});
+app.use(express.json());
+
+app.post("/", (req, res) => {
+  console.log(req.body);
+  res.json({message: "Data received", data: req.body});
 });
 
 app.listen(5100, () => console.log("Server running on port 5100"));
