@@ -19,13 +19,28 @@ let jobs = [
   {id: nanoid(), name: "Web Developer", company: "Microsoft"},
 ];
 
+app.post("/", (req, res) => {
+  console.log(req.body);
+  res.json({message: "Data received", data: req.body});
+});
+
+// GET, POST jobs
 app.get("/api/v1/jobs", (req, res) => {
   res.status(200).json({jobs});
 });
 
-app.post("/", (req, res) => {
-  console.log(req.body);
-  res.json({message: "Data received", data: req.body});
+app.post("/api/v1/jobs", (req, res) => {
+  const {name, company} = req.body;
+
+  if (!name || !company) {
+    res.status(400).json({message: "Please provide all values"});
+    return;
+  }
+
+  const id = nanoid(10);
+  const job = {id, name, company};
+  jobs.push(job);
+  res.status(200).json({message: "Job created"});
 });
 
 const port = process.env.PORT || 5100;
