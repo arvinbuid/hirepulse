@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import express from "express";
 import morgan from "morgan";
 
+import {Request, Response, NextFunction} from "express";
 import {nanoid} from "nanoid";
 
 dotenv.config();
@@ -98,6 +99,17 @@ app.delete("/api/v1/jobs/:id", (req, res) => {
   jobs = deletedJob;
 
   res.status(204).json({message: "Job deleted"});
+});
+
+// Not found route
+app.use("*", (req, res) => {
+  res.status(404).json({message: "Not found."});
+});
+
+// Global error handler middleware
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  console.log(err);
+  res.status(500).json({message: "Something went wrong."});
 });
 
 const port = process.env.PORT || 5100;
