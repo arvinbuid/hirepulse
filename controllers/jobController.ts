@@ -1,6 +1,8 @@
 import {Request, Response, NextFunction} from "express";
 import {nanoid} from "nanoid";
 
+import Job from "../models/JobModel.ts";
+
 let jobs = [
   {id: nanoid(), name: "Software Engineer", company: "Google"},
   {id: nanoid(), name: "Web Developer", company: "Microsoft"},
@@ -23,18 +25,11 @@ export const getJob = (req: Request, res: Response) => {
   res.status(200).json({job});
 };
 
-export const postCreateJob = (req: Request, res: Response) => {
-  const {name, company} = req.body;
+export const postCreateJob = async (req: Request, res: Response) => {
+  const {company, position} = req.body;
 
-  if (!name || !company) {
-    res.status(400).json({message: "Please provide all values"});
-    return;
-  }
-
-  const id = nanoid(10);
-  const job = {id, name, company};
-  jobs.push(job);
-  res.status(200).json({message: "Job created"});
+  const job = await Job.create({company, position});
+  res.status(200).json({job});
 };
 
 export const editJob = (req: Request, res: Response) => {
