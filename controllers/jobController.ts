@@ -1,14 +1,7 @@
 import "express-async-errors";
-
 import {Request, Response, NextFunction} from "express";
-import {nanoid} from "nanoid";
 
 import Job from "../models/JobModel.ts";
-
-let jobs = [
-  {id: nanoid(), name: "Software Engineer", company: "Google"},
-  {id: nanoid(), name: "Web Developer", company: "Microsoft"},
-];
 
 export const getAllJobs = async (req: Request, res: Response) => {
   const jobs = await Job.find();
@@ -36,42 +29,28 @@ export const postCreateJob = async (req: Request, res: Response) => {
   res.status(200).json({job});
 };
 
-export const editJob = (req: Request, res: Response) => {
-  const {name, company} = req.body;
-
-  if (!name || !company) {
-    res.status(400).json({message: "Please provide all values"});
-    return;
-  }
-
+export const updateJob = async (req: Request, res: Response) => {
   const {id} = req.params;
 
-  const job = jobs.find((job) => job.id === id);
+  const updatedJob = await Job.findByIdAndUpdate(id, req.body, {new: true});
 
-  if (!job) {
+  if (!updatedJob) {
     res.status(404).json({message: `No job with id ${id}`});
     return;
   }
 
-  // Update job
-  job.name = name;
-  job.company = company;
-
-  res.status(200).json({message: "Job edited successfully", job});
+  res.status(200).json({message: "Job updated successfully", job: updatedJob});
 };
 
-export const deleteJob = (req: Request, res: Response) => {
+export const deleteJob = async (req: Request, res: Response) => {
   const {id} = req.params;
 
-  const job = jobs.find((job) => job.id === id);
+  const removedJob = await Job.findByIdAndDelete(id);
 
-  if (!job) {
+  if (!removedJob) {
     res.status(404).json({message: `No job with id ${id}`});
     return;
   }
-
-  const deletedJob = jobs.filter((job) => job.id !== id);
-  jobs = deletedJob;
 
   res.status(204).json({message: "Job deleted"});
 };

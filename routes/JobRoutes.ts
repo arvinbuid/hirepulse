@@ -3,7 +3,7 @@ import {
   getAllJobs,
   getJob,
   postCreateJob,
-  editJob,
+  updateJob,
   deleteJob,
 } from "../controllers/jobController.ts";
 
@@ -15,7 +15,7 @@ router.get("/:id", getJob);
 
 router.post("/", postCreateJob);
 
-router.patch("/:id", editJob);
+router.patch("/:id", updateJob);
 
 router.delete("/:id", deleteJob);
 
