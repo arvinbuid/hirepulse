@@ -10,14 +10,16 @@ let jobs = [
   {id: nanoid(), name: "Web Developer", company: "Microsoft"},
 ];
 
-export const getAllJobs = (req: Request, res: Response) => {
+export const getAllJobs = async (req: Request, res: Response) => {
+  const jobs = await Job.find();
+
   res.status(200).json({jobs});
 };
 
-export const getJob = (req: Request, res: Response) => {
+export const getJob = async (req: Request, res: Response) => {
   const {id} = req.params;
 
-  const job = jobs.find((job) => job.id === id);
+  const job = await Job.findById(id);
 
   if (!job) {
     res.status(404).json({message: `No job with id ${id}`});
