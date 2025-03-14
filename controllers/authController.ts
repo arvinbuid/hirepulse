@@ -4,6 +4,7 @@ import {StatusCodes} from "http-status-codes";
 import User from "../models/userModel.ts";
 import {comparePassword, hashPassword} from "../utils/passwordUtils.ts";
 import {UnauthenticatedError} from "../errors/customErrors.ts";
+import {createJWT} from "../utils/tokenUtils.ts";
 
 export const postRegister = async (req: Request, res: Response) => {
   const isFirstUser = (await User.countDocuments()) === 0;
@@ -29,6 +30,10 @@ export const postLogin = async (req: Request, res: Response) => {
   if (!isPasswordCorrect) {
     throw new UnauthenticatedError("Invalid credentials.");
   }
+
+  // Create token
+  const token = createJWT({userId: user._id.toString(), role: user.role});
+  console.log(token);
 
   res.status(StatusCodes.OK).json({message: "User logged in successfully."});
 };
