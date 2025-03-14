@@ -17,10 +17,6 @@ export const getJob = async (req: Request, res: Response) => {
 
   const job = await Job.findById(id);
 
-  if (!job) {
-    throw new NotFoundError(`No job with id ${id}`);
-  }
-
   res.status(StatusCodes.OK).json({job});
 };
 
@@ -36,21 +32,13 @@ export const updateJob = async (req: Request, res: Response) => {
 
   const updatedJob = await Job.findByIdAndUpdate(id, req.body, {new: true});
 
-  if (!updatedJob) {
-    throw new NotFoundError(`No job with id ${id}`);
-  }
-
   res.status(StatusCodes.OK).json({message: "Job updated successfully", job: updatedJob});
 };
 
 export const deleteJob = async (req: Request, res: Response) => {
   const {id} = req.params;
 
-  const removedJob = await Job.findByIdAndDelete(id);
-
-  if (!removedJob) {
-    throw new NotFoundError(`No job with id ${id}`);
-  }
+  await Job.findByIdAndDelete(id);
 
   res.status(StatusCodes.NO_CONTENT).json({message: "Job deleted"});
 };
