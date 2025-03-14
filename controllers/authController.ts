@@ -1,9 +1,13 @@
 import {Request, Response, NextFunction} from "express";
 
-export const getLogin = async (req: Request, res: Response) => {
-  res.json({message: "Login"});
+import User from "../models/userModel.ts";
+
+export const postRegister = async (req: Request, res: Response) => {
+  const user = await User.create(req.body);
+
+  res.json({message: "User created.", user});
 };
 
-export const getRegister = async (req: Request, res: Response) => {
-  res.json({message: "Register"});
+export const postLogin = async (req: Request, res: Response) => {
+  res.json({message: "Login"});
 };
