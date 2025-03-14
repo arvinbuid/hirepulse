@@ -7,6 +7,7 @@ import {BadRequestError, NotFoundError} from "../errors/customErrors.ts";
 import {JOB_STATUS, JOB_TYPE} from "../utils/constants.ts";
 
 import Job from "../models/JobModel.ts";
+import User from "../models/userModel.ts";
 
 const withValidationErrors = (validateValues: ValidationChain[]) => {
   return [
@@ -52,4 +53,23 @@ export const validateParamId = withValidationErrors([
     // Store the job in req object
     req.job = job;
   }),
+]);
+
+export const validateRegisterInput = withValidationErrors([
+  body("name").notEmpty().withMessage("name is required."),
+  body("email")
+    .notEmpty()
+    .withMessage("email is required.")
+    .isEmail()
+    .withMessage("Invalid email format")
+    .custom(async (email) => {
+      const user = await User.findOne({email});
+      if (user) {
+        throw new BadRequestError("email already exists.");
+      }
+    })
+    .normalizeEmail(),
+  body("password").isLength({min: 6}).withMessage("password must be at least 6 characters long."),
+  body("lastName").notEmpty().withMessage("last name is required."),
+  body("location").notEmpty().withMessage("location is required."),
 ]);
