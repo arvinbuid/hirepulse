@@ -7,18 +7,18 @@ import {
   deleteJob,
 } from "../controllers/jobController.ts";
 
-import {validateJobInput} from "../middleware/validation.ts";
+import {validateJobInput, validateParamId} from "../middleware/validation.ts";
 
 const router = Router();
 
 router.get("/", getAllJobs);
 
-router.get("/:id", getJob);
+router.get("/:id", validateParamId, getJob);
 
 router.post("/", validateJobInput, postCreateJob);
 
-router.patch("/:id", validateJobInput, updateJob);
+router.patch("/:id", validateParamId, validateJobInput, updateJob);
 
-router.delete("/:id", deleteJob);
+router.delete("/:id", validateParamId, deleteJob);
 
 export default router;

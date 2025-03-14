@@ -1,7 +1,8 @@
 import express from "express";
+import mongoose from "mongoose";
 
 import {Request, Response, NextFunction} from "express";
-import {body, ValidationChain, validationResult} from "express-validator";
+import {body, param, ValidationChain, validationResult} from "express-validator";
 import {BadRequestError} from "../errors/customErrors.ts";
 import {JOB_STATUS, JOB_TYPE} from "../utils/constants.ts";
 
@@ -29,4 +30,10 @@ export const validateJobInput = withValidationErrors([
   body("jobLocation").notEmpty().withMessage("job location is required."),
   body("jobStatus").isIn(Object.values(JOB_STATUS)).withMessage("invalid job status."),
   body("jobType").isIn(Object.values(JOB_TYPE)).withMessage("invalid job type."),
+]);
+
+export const validateParamId = withValidationErrors([
+  param("id")
+    .custom((id) => mongoose.Types.ObjectId.isValid(id))
+    .withMessage("invalid MongoDB id."),
 ]);
