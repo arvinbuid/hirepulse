@@ -1,8 +1,9 @@
 import express from "express";
 
 import {Request, Response, NextFunction} from "express";
-import {ValidationChain, validationResult} from "express-validator";
+import {body, ValidationChain, validationResult} from "express-validator";
 import {BadRequestError} from "../errors/customErrors.ts";
+import {JOB_STATUS, JOB_TYPE} from "../utils/constants.ts";
 
 const withValidationErrors = (validateValues: ValidationChain[]) => {
   return [
@@ -17,3 +18,15 @@ const withValidationErrors = (validateValues: ValidationChain[]) => {
     }) as express.RequestHandler,
   ];
 };
+
+export const validateJobInput = withValidationErrors([
+  body("company")
+    .notEmpty()
+    .withMessage("company is required.")
+    .isLength({min: 3, max: 50})
+    .withMessage("company must be at least 3 and at most 50 characters."),
+  body("position").notEmpty().withMessage("position is required."),
+  body("jobLocation").notEmpty().withMessage("job location is required."),
+  body("jobStatus").isIn(Object.values(JOB_STATUS)).withMessage("invalid job status."),
+  body("jobType").isIn(Object.values(JOB_TYPE)).withMessage("invalid job type."),
+]);
