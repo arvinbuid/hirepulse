@@ -4,6 +4,7 @@ import morgan from "morgan";
 import mongoose from "mongoose";
 
 import jobRoutes from "./routes/JobRoutes.ts";
+import authRoutes from "./routes/authRoutes.ts";
 
 import errorHandlerMiddleware from "./middleware/errorHandler.ts";
 
@@ -19,6 +20,7 @@ if (process.env.NODE_ENV === "development") {
 
 // Routes
 app.use("/api/v1/jobs", jobRoutes);
+app.use("/api/v1/auth", authRoutes);
 
 // Not found route
 app.use("*", (req, res) => {
