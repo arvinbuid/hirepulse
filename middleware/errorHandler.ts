@@ -1,10 +1,10 @@
 import {Request, Response, NextFunction} from "express";
 
 import {StatusCodes} from "http-status-codes";
-import {NotFoundError} from "../errors/customErrors.ts";
+import {BadRequestError} from "../errors/customErrors.ts";
 
 const errorHandlerMiddleware = (
-  err: NotFoundError,
+  err: BadRequestError,
   req: Request,
   res: Response,
   next: NextFunction
