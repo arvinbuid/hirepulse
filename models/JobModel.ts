@@ -5,8 +5,8 @@ import {JOB_STATUS, JOB_TYPE} from "../utils/constants.ts";
 export interface IJob {
   company: string;
   position: string;
-  jobStatus: {};
-  jobType: {};
+  jobStatus: (typeof JOB_STATUS)[keyof typeof JOB_STATUS];
+  jobType: (typeof JOB_TYPE)[keyof typeof JOB_TYPE];
   jobLocation: string;
 }
 
