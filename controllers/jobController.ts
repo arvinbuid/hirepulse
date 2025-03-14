@@ -2,8 +2,6 @@ import "express-async-errors";
 import {Request, Response, NextFunction} from "express";
 import {StatusCodes} from "http-status-codes";
 
-import {NotFoundError} from "../errors/customErrors.ts";
-
 import Job from "../models/JobModel.ts";
 
 export const getAllJobs = async (req: Request, res: Response) => {
@@ -13,9 +11,7 @@ export const getAllJobs = async (req: Request, res: Response) => {
 };
 
 export const getJob = async (req: Request, res: Response) => {
-  const {id} = req.params;
-
-  const job = await Job.findById(id);
+  const job = req.job;
 
   res.status(StatusCodes.OK).json({job});
 };

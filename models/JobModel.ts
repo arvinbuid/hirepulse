@@ -2,7 +2,7 @@ import {Schema, model} from "mongoose";
 
 import {JOB_STATUS, JOB_TYPE} from "../utils/constants.ts";
 
-interface IJob {
+export interface IJob {
   company: string;
   position: string;
   jobStatus: {};
