@@ -3,9 +3,9 @@ import express from "express";
 import morgan from "morgan";
 import mongoose from "mongoose";
 
-import {Request, Response, NextFunction} from "express";
-
 import jobRoutes from "./routes/JobRoutes.ts";
+
+import errorHandlerMiddleware from "./middleware/errorHandler.ts";
 
 dotenv.config();
 
@@ -26,10 +26,7 @@ app.use("*", (req, res) => {
 });
 
 // Global error handler middleware
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  console.log(err);
-  res.status(500).json({message: "Something went wrong."});
-});
+app.use(errorHandlerMiddleware);
 
 const port = process.env.PORT || 5100;
 
