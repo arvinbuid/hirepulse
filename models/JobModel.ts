@@ -10,14 +10,8 @@ interface IJob {
 
 const jobSchema = new Schema<IJob>(
   {
-    company: {
-      type: String,
-      required: [true, "Company name is required."],
-    },
-    position: {
-      type: String,
-      required: [true, "Position is required"],
-    },
+    company: String,
+    position: String,
     jobStatus: {
       type: String,
       enum: ["interview", "declined", "pending"],
