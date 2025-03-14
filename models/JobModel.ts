@@ -1,10 +1,12 @@
 import {Schema, model} from "mongoose";
 
+import {JOB_STATUS, JOB_TYPE} from "../utils/constants.ts";
+
 interface IJob {
   company: string;
   position: string;
-  jobStatus: "interview" | "declined" | "pending";
-  jobType: "full-time" | "part-time" | "internship";
+  jobStatus: {};
+  jobType: {};
   jobLocation: string;
 }
 
@@ -14,13 +16,13 @@ const jobSchema = new Schema<IJob>(
     position: String,
     jobStatus: {
       type: String,
-      enum: ["interview", "declined", "pending"],
-      default: "pending",
+      enum: Object.values(JOB_STATUS),
+      default: JOB_STATUS.PENDING,
     },
     jobType: {
       type: String,
-      enum: ["full-time", "part-time", "internship"],
-      default: "full-time",
+      enum: Object.values(JOB_TYPE),
+      default: JOB_TYPE.FULL_TIME,
     },
     jobLocation: {
       type: String,
