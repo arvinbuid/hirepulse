@@ -1,4 +1,4 @@
-import {Schema, model} from "mongoose";
+import mongoose, {Schema, model} from "mongoose";
 
 import {JOB_STATUS, JOB_TYPE} from "../utils/constants.ts";
 
@@ -8,6 +8,7 @@ export interface IJob {
   jobStatus: (typeof JOB_STATUS)[keyof typeof JOB_STATUS];
   jobType: (typeof JOB_TYPE)[keyof typeof JOB_TYPE];
   jobLocation: string;
+  createdBy: mongoose.Types.ObjectId;
 }
 
 const jobSchema = new Schema<IJob>(
@@ -27,6 +28,10 @@ const jobSchema = new Schema<IJob>(
     jobLocation: {
       type: String,
       default: "my city",
+    },
+    createdBy: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
     },
   },
   {
