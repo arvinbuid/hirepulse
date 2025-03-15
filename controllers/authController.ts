@@ -33,7 +33,13 @@ export const postLogin = async (req: Request, res: Response) => {
 
   // Create token
   const token = createJWT({userId: user._id.toString(), role: user.role});
-  console.log(token);
+
+  // Set cookie
+  res.cookie("token", token, {
+    httpOnly: true,
+    expires: new Date(Date.now() + 1000 * 60 * 60 * 24), // 1 day
+    secure: process.env.NODE_ENV === "production",
+  });
 
   res.status(StatusCodes.OK).json({message: "User logged in successfully."});
 };
