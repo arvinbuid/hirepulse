@@ -9,12 +9,14 @@ import authRoutes from "./routes/authRoutes.ts";
 // Middlewares
 import errorHandlerMiddleware from "./middleware/errorHandler.ts";
 import {authenticateUser} from "./middleware/auth.ts";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
 const app = express();
 
 app.use(express.json());
+app.use(cookieParser());
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
