@@ -5,7 +5,7 @@ import {StatusCodes} from "http-status-codes";
 import Job from "../models/JobModel.ts";
 
 export const getAllJobs = async (req: Request, res: Response) => {
-  const jobs = await Job.find();
+  const jobs = await Job.find({createdBy: req.user?.userId});
 
   res.status(StatusCodes.OK).json({jobs});
 };
@@ -17,9 +17,10 @@ export const getJob = async (req: Request, res: Response) => {
 };
 
 export const postCreateJob = async (req: Request, res: Response) => {
-  const {company, position} = req.body;
+  req.body.createdBy = req.user?.userId;
+  const {company, position, createdBy} = req.body;
 
-  const job = await Job.create({company, position});
+  const job = await Job.create({company, position, createdBy});
   res.status(StatusCodes.CREATED).json({job});
 };
 
