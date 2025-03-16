@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 
 import {Request, Response, NextFunction} from "express";
 import {body, param, ValidationChain, validationResult} from "express-validator";
-import {BadRequestError, NotFoundError} from "../errors/customErrors.ts";
+import {BadRequestError, NotFoundError, UnauthorizedError} from "../errors/customErrors.ts";
 import {JOB_STATUS, JOB_TYPE} from "../utils/constants.ts";
 
 import Job from "../models/JobModel.ts";
@@ -18,6 +18,9 @@ const withValidationErrors = (validateValues: ValidationChain[]) => {
         const errorMessages = errors.array().map((error) => error.msg);
         if (errorMessages[0].startsWith("no job")) {
           throw new NotFoundError(errorMessages[0]);
+        }
+        if (errorMessages[0].startsWith("not authorized")) {
+          throw new UnauthorizedError(errorMessages[0]);
         }
         throw new BadRequestError(errorMessages.join(", "));
       }
@@ -48,6 +51,13 @@ export const validateParamId = withValidationErrors([
 
     if (!job) {
       throw new NotFoundError(`No job with id ${id}`);
+    }
+
+    const isAdmin = req.user?.role === "admin";
+    const isOwner = req.user?.userId === job.createdBy.toString();
+
+    if (!isAdmin && !isOwner) {
+      throw new UnauthorizedError("not authorized to access this route.");
     }
 
     // Store the job in req object
