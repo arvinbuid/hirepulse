@@ -43,3 +43,12 @@ export const postLogin = async (req: Request, res: Response) => {
 
   res.status(StatusCodes.OK).json({message: "User logged in successfully."});
 };
+
+export const getLogout = (req: Request, res: Response) => {
+  res.cookie("token", "logout", {
+    httpOnly: true,
+    expires: new Date(Date.now()),
+  });
+
+  res.status(StatusCodes.OK).json({message: "User logged out successfully."});
+};
