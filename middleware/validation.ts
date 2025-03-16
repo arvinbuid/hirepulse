@@ -7,7 +7,7 @@ import {BadRequestError, NotFoundError} from "../errors/customErrors.ts";
 import {JOB_STATUS, JOB_TYPE} from "../utils/constants.ts";
 
 import Job from "../models/JobModel.ts";
-import User from "../models/userModel.ts";
+import User from "../models/UserModel.ts";
 
 const withValidationErrors = (validateValues: ValidationChain[]) => {
   return [

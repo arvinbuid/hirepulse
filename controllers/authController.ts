@@ -1,7 +1,7 @@
 import {Request, Response, NextFunction} from "express";
 import {StatusCodes} from "http-status-codes";
 
-import User from "../models/userModel.ts";
+import User from "../models/UserModel.ts";
 import {comparePassword, hashPassword} from "../utils/passwordUtils.ts";
 import {UnauthenticatedError} from "../errors/customErrors.ts";
 import {createJWT} from "../utils/tokenUtils.ts";
