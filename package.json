@@ -4,9 +4,11 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "setup-project": "npm i && cd frontend && npm",
+    "setup-project": "npm i && cd frontend && npm i",
     "start": "node dist/server.js",
-    "dev": "nodemon"
+    "server": "nodemon server",
+    "client": "cd frontend && npm run dev",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
   },
   "keywords": [],
   "author": "",
@@ -30,6 +32,7 @@
     "@types/jsonwebtoken": "^9.0.9",
     "@types/morgan": "^1.9.9",
     "@types/node": "^22.13.10",
+    "concurrently": "^9.1.2",
     "morgan": "^1.10.0",
     "nodemon": "^3.1.9",
     "typescript": "^5.8.2"
