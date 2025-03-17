@@ -2,6 +2,7 @@ import {StatusCodes} from "http-status-codes";
 import {Request, Response} from "express";
 
 import User from "../models/UserModel.ts";
+import Job from "../models/JobModel.ts";
 
 export const getCurrentUser = async (req: Request, res: Response) => {
   const user = await User.findOne({_id: req.user?.userId}).select("-password");
@@ -9,7 +10,9 @@ export const getCurrentUser = async (req: Request, res: Response) => {
 };
 
 export const getApplicationStats = async (req: Request, res: Response) => {
-  res.status(StatusCodes.OK).json({message: "application stats."});
+  const userCount = await User.countDocuments();
+  const jobCount = await Job.countDocuments();
+  res.status(StatusCodes.OK).json({userCount, jobCount});
 };
 
 export const updateUser = async (req: Request, res: Response) => {
