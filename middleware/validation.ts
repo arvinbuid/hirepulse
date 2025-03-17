@@ -66,7 +66,11 @@ export const validateParamId = withValidationErrors([
 ]);
 
 export const validateRegisterInput = withValidationErrors([
-  body("name").notEmpty().withMessage("name is required."),
+  body("name")
+    .notEmpty()
+    .withMessage("name is required.")
+    .isLength({min: 3})
+    .withMessage("name must be at least 3 characters long."),
   body("email")
     .notEmpty()
     .withMessage("email is required.")
