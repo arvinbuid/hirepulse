@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 
 import jobRoutes from "./routes/JobRoutes.ts";
 import authRoutes from "./routes/authRoutes.ts";
+import userRoutes from "./routes/userRoutes.ts";
 
 // Middlewares
 import errorHandlerMiddleware from "./middleware/errorHandler.ts";
@@ -25,6 +26,7 @@ if (process.env.NODE_ENV === "development") {
 
 // Routes
 app.use("/api/v1/jobs", authenticateUser, jobRoutes);
+app.use("/api/v1/users", authenticateUser, userRoutes);
 app.use("/api/v1/auth", authRoutes);
 
 // Not found route
