@@ -1,14 +1,15 @@
 import {Outlet, useLoaderData} from "react-router-dom";
 import {BigSidebar, Navbar, SmallSidebar} from "../components";
 import {DashboardProvider} from "../contexts/DashboardContext";
+import {User} from "../types";
 
 import Wrapper from "../assets/wrappers/Dashboard";
 
 const DashboardLayout = () => {
-  const loader = useLoaderData();
-  console.log(loader);
+  const {user} = useLoaderData() as {user: User};
+
   return (
-    <DashboardProvider>
+    <DashboardProvider currentUser={user}>
       <Wrapper>
         <main className='dashboard'>
           <SmallSidebar />
@@ -16,7 +17,7 @@ const DashboardLayout = () => {
           <div>
             <Navbar />
             <div className='dashboard-page'>
-              <Outlet />
+              <Outlet context={user} />
             </div>
           </div>
         </main>
