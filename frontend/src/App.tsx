@@ -14,8 +14,8 @@ import {
   Profile,
 } from "./pages";
 
-import {action as registerAction} from "./actions/registerActions";
-import {action as loginAction} from "./actions/loginActions";
+import {action as registerAction} from "./actions/registerAction";
+import {action as loginAction} from "./actions/loginAction";
 
 const router = createBrowserRouter([
   {
