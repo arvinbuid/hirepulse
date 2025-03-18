@@ -1,8 +1,11 @@
 import React, {useState, ReactNode} from "react";
-import {DashboardPageContext} from "./DashboardContextTypes";
+import {useNavigate} from "react-router-dom";
 
-import checkDarkTheme from "../utils/checkDarkTheme";
+import {DashboardPageContext} from "./DashboardContextTypes";
 import {User} from "../types";
+import {toast} from "react-toastify";
+import checkDarkTheme from "../utils/checkDarkTheme";
+import customFetch from "../utils/customFetch";
 
 interface DashboardProviderProps {
   currentUser: User;
@@ -12,6 +15,7 @@ interface DashboardProviderProps {
 const isDarkThemeEnabled = checkDarkTheme(); //
 
 export const DashboardProvider: React.FC<DashboardProviderProps> = ({children, currentUser}) => {
+  const navigate = useNavigate();
   const [user, setUser] = useState(currentUser);
   const [showSidebar, setShowSidebar] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(isDarkThemeEnabled);
@@ -28,7 +32,9 @@ export const DashboardProvider: React.FC<DashboardProviderProps> = ({children, c
   };
 
   const logoutUser = async (): Promise<void> => {
-    console.log("user logout");
+    navigate("/");
+    await customFetch.get("/auth/logout");
+    toast.success("Logout successfully.");
   };
 
   const value = {
