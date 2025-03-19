@@ -1,11 +1,14 @@
+import {ChangeEvent} from "react";
+
 interface FormRowProps {
   name: string;
   type: string;
   labelText: string;
-  defaultValue: string;
+  defaultValue?: string;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const FormRow = ({name, type, labelText, defaultValue}: FormRowProps) => {
+const FormRow = ({name, type, labelText, defaultValue, onChange}: FormRowProps) => {
   return (
     <div className='form-row'>
       <label htmlFor={name} className='form-label'>
@@ -17,6 +20,7 @@ const FormRow = ({name, type, labelText, defaultValue}: FormRowProps) => {
         id={name}
         className='form-input'
         defaultValue={defaultValue}
+        onChange={onChange}
         required
       />
     </div>
