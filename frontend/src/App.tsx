@@ -19,6 +19,7 @@ import {action as loginAction} from "./actions/loginAction";
 import {action as addJobAction} from "./actions/addJobAction";
 
 import {loader as dashboardLoader} from "./loaders/dashboardLoader";
+import {loader as allJobsLoader} from "./loaders/allJobsLoader";
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,7 @@ const router = createBrowserRouter([
           {
             path: "all-jobs",
             element: <AllJobs />,
+            loader: allJobsLoader,
           },
           {
             path: "profile",

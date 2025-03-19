@@ -1,5 +1,16 @@
+import {JobsContainer, SearchContainer} from "../components";
+import {useLoaderData} from "react-router-dom";
+
+import {IJob as Job} from "../../../models/JobModel";
 const AllJobs = () => {
-  return <div>AllJobs</div>;
+  const {data} = useLoaderData() as {data: Job};
+  console.log(data);
+  return (
+    <>
+      <SearchContainer />
+      <JobsContainer />
+    </>
+  );
 };
 
 export default AllJobs;
