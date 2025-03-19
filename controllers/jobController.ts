@@ -18,9 +18,8 @@ export const getJob = async (req: Request, res: Response) => {
 
 export const postCreateJob = async (req: Request, res: Response) => {
   req.body.createdBy = req.user?.userId;
-  const {company, position, createdBy} = req.body;
 
-  const job = await Job.create({company, position, createdBy});
+  const job = await Job.create(req.body);
   res.status(StatusCodes.CREATED).json({job});
 };
 
