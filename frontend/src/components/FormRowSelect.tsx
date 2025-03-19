@@ -10,10 +10,16 @@ interface FormRowSelectProps {
 const FormRowSelect = ({name, labelText, list, defaultValue = ""}: FormRowSelectProps) => {
   return (
     <div className='form-row'>
-      <label htmlFor={labelText} className='form-label'>
+      <label htmlFor={name} className='form-label'>
         {labelText}
       </label>
-      <select name={name} id={name} className='form-select' defaultValue={defaultValue}>
+      <select
+        name={name}
+        id={name}
+        className='form-select'
+        defaultValue={defaultValue}
+        autoComplete='on'
+      >
         {list.map((status) => {
           return (
             <option value={status} key={status}>

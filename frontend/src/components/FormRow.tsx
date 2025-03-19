@@ -21,6 +21,7 @@ const FormRow = ({name, type, labelText, defaultValue = "", onChange}: FormRowPr
         className='form-input'
         defaultValue={defaultValue}
         onChange={onChange}
+        autoComplete='on'
         required
       />
     </div>
