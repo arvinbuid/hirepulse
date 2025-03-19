@@ -1,8 +1,9 @@
-import {useParams} from "react-router-dom";
+import {useLoaderData} from "react-router-dom";
+import {Job} from "../types";
 
 const EditJob = () => {
-  const params = useParams();
-  console.log(params);
+  const {job} = useLoaderData() as {job: Job};
+  console.log(job);
   return <div>EditJob</div>;
 };
 
