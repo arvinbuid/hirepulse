@@ -7,7 +7,7 @@ import JobInfo from "./JobInfo";
 import day from "dayjs";
 
 const Job = ({_id, position, company, jobStatus, jobType, jobLocation, createdAt}: Job) => {
-  const date = day(createdAt).format("MMM D, YYYY");
+  const date = day(createdAt).format("MMM D[th], YYYY");
 
   return (
     <Wrapper>
