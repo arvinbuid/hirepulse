@@ -8,7 +8,7 @@ interface FormRowProps {
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const FormRow = ({name, type, labelText, defaultValue, onChange}: FormRowProps) => {
+const FormRow = ({name, type, labelText, defaultValue = "", onChange}: FormRowProps) => {
   return (
     <div className='form-row'>
       <label htmlFor={name} className='form-label'>
