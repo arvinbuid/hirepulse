@@ -1,9 +1,9 @@
 import {ReactNode} from "react";
 import {AllJobsContext} from "./AllJobsContextTypes";
-import {IJob as Job} from "../../../models/JobModel";
+import {Job} from "../types";
 
 interface AllJobsProviderProps {
-  data: Job[];
+  data: {jobs: Job[]};
   children: ReactNode;
 }
 

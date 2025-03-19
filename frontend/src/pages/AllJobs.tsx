@@ -1,10 +1,10 @@
 import {JobsContainer, SearchContainer} from "../components";
 import {useLoaderData} from "react-router-dom";
 
-import {IJob as Job} from "../../../models/JobModel";
+import {Job} from "../types";
 import {AllJobsProvider} from "../contexts/AllJobsContext";
 const AllJobs = () => {
-  const {data} = useLoaderData() as {data: Job[]};
+  const {data} = useLoaderData() as {data: {jobs: Job[]}};
   return (
     <AllJobsProvider data={data}>
       <SearchContainer />

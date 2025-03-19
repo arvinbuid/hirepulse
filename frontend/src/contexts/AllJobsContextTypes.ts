@@ -1,8 +1,8 @@
 import {createContext} from "react";
-import {IJob as Job} from "../../../models/JobModel";
+import {Job} from "../types";
 
 interface AllJobsContextType {
-  data: Job[];
+  data: {jobs: Job[]};
 }
 
 export const AllJobsContext = createContext<AllJobsContextType | undefined>(undefined);
