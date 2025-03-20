@@ -13,10 +13,17 @@ import errorHandlerMiddleware from "./middleware/errorHandler.ts";
 import {authenticateUser} from "./middleware/auth.ts";
 import cookieParser from "cookie-parser";
 
+// Public
+import path, {dirname} from "path";
+import {fileURLToPath} from "url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
 dotenv.config();
 
 const app = express();
 
+app.use(express.static(path.resolve(__dirname, "./public")));
 app.use(express.json());
 app.use(cookieParser());
 
