@@ -9,6 +9,8 @@ interface IUser {
   lastName: string;
   location: string;
   role: (typeof USER_ROLE)[keyof typeof USER_ROLE];
+  avatar: string;
+  avatarPublicId: string;
 }
 
 const userSchema = new Schema<IUser>({
@@ -31,6 +33,8 @@ const userSchema = new Schema<IUser>({
     enum: Object.values(USER_ROLE),
     default: USER_ROLE.USER,
   },
+  avatar: String,
+  avatarPublicId: String,
 });
 
 const User = model<IUser>("User", userSchema);
