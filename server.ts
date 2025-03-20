@@ -3,6 +3,7 @@ import "./types";
 import express from "express";
 import morgan from "morgan";
 import mongoose from "mongoose";
+import {v2 as cloudinary} from "cloudinary";
 
 import jobRoutes from "./routes/JobRoutes.ts";
 import authRoutes from "./routes/authRoutes.ts";
@@ -16,6 +17,13 @@ import cookieParser from "cookie-parser";
 // Public
 import path, {dirname} from "path";
 import {fileURLToPath} from "url";
+
+// Cloudinary config
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_API_KEY,
+  api_secret: process.env.CLOUD_API_SECRET,
+});
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
