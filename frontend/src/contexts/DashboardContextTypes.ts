@@ -2,6 +2,7 @@ import {createContext} from "react";
 
 interface User {
   name: string;
+  avatar: string;
 }
 
 interface DashboardContextType {

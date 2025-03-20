@@ -1,5 +1,7 @@
 import {StatusCodes} from "http-status-codes";
 import {Request, Response} from "express";
+import {v2 as cloudinary} from "cloudinary";
+import {promises as fs} from "fs";
 
 import User from "../models/UserModel.ts";
 import Job from "../models/JobModel.ts";
@@ -16,9 +18,22 @@ export const getApplicationStats = async (req: Request, res: Response) => {
 };
 
 export const updateUser = async (req: Request, res: Response) => {
-  const userObj = {...req.body};
-  delete userObj.password; // remove password from user object
+  const newUser = {...req.body};
+  delete newUser.password; // remove password from user object
 
-  await User.findOneAndUpdate({_id: req.user?.userId}, userObj);
+  if (req.file) {
+    const response = await cloudinary.uploader.upload(req.file.path);
+    await fs.unlink(req.file.path); // remove old image
+    newUser.avatar = response.secure_url + "?timestamp=" + Date.now();
+    newUser.avatarPublicId = response.public_id;
+  }
+
+  const oldUser = await User.findOneAndUpdate({_id: req.user?.userId}, newUser);
+
+  // If there is new file and there is existing image,
+  // delete existing image
+  if (req.file && oldUser!.avatarPublicId) {
+    await cloudinary.uploader.destroy(oldUser!.avatarPublicId);
+  }
   res.status(StatusCodes.OK).json({message: "User updated successfully."});
 };

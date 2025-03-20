@@ -10,6 +10,7 @@ export interface User {
   lastName: string;
   location: string;
   role: (typeof USER_ROLE)[keyof typeof USER_ROLE];
+  avatar: string;
 }
 
 export interface Job {
