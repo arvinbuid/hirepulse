@@ -20,6 +20,7 @@ import {action as loginAction} from "./actions/loginAction";
 import {action as addJobAction} from "./actions/addJobAction";
 import {action as editJobAction} from "./actions/editJobAction";
 import {action as deleteJobAction} from "./actions/deleteJobAction";
+import {action as profileAction} from "./actions/profileAction";
 
 import {loader as dashboardLoader} from "./loaders/dashboardLoader";
 import {loader as allJobsLoader} from "./loaders/allJobsLoader";
@@ -68,6 +69,7 @@ const router = createBrowserRouter([
           {
             path: "profile",
             element: <Profile />,
+            action: profileAction,
           },
           {
             path: "admin",
