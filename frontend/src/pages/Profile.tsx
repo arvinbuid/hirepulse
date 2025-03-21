@@ -1,14 +1,11 @@
-import {Form, useNavigation, useOutletContext} from "react-router-dom";
+import {Form, useOutletContext} from "react-router-dom";
 import {User} from "../types";
 
 import Wrapper from "../assets/wrappers/DashboardFormPage";
-import {FormRow} from "../components";
+import {FormRow, SubmitBtn} from "../components";
 const Profile = () => {
   const {user} = useOutletContext() as {user: User};
   const {name, email, lastName, location} = user;
-
-  const navigation = useNavigation();
-  const isSubmitting = navigation.state === "submitting";
 
   return (
     <Wrapper>
@@ -27,9 +24,7 @@ const Profile = () => {
           <FormRow type='text' name='lastName' labelText='Last Name' defaultValue={lastName} />
           <FormRow type='email' name='email' labelText='Email' defaultValue={email} />
           <FormRow type='text' name='location' labelText='Location' defaultValue={location} />
-          <button type='submit' className='btn form-btn' disabled={isSubmitting}>
-            {isSubmitting ? "submitting..." : "submit"}
-          </button>
+          <SubmitBtn formBtn />
         </div>
       </Form>
     </Wrapper>

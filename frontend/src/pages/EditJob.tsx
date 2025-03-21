@@ -1,14 +1,12 @@
-import {Form, useLoaderData, useNavigation} from "react-router-dom";
+import {Form, useLoaderData} from "react-router-dom";
 import {Job} from "../types";
 import {JOB_STATUS, JOB_TYPE} from "../../../utils/constants";
-import {FormRow, FormRowSelect} from "../components";
+import {FormRow, FormRowSelect, SubmitBtn} from "../components";
 
 import Wrapper from "../assets/wrappers/DashboardFormPage";
 
 const EditJob = () => {
   const {job} = useLoaderData() as {job: Job};
-  const navigation = useNavigation();
-  const isSubmitting = navigation.state === "submitting";
 
   return (
     <Wrapper>
@@ -35,9 +33,7 @@ const EditJob = () => {
             defaultValue={job.jobType}
             list={Object.values(JOB_TYPE)}
           />
-          <button type='submit' className='btn btn-block form-btn' disabled={isSubmitting}>
-            {isSubmitting ? "submitting..." : "update"}
-          </button>
+          <SubmitBtn formBtn />
         </div>
       </Form>
     </Wrapper>
