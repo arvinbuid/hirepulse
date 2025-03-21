@@ -1,13 +1,23 @@
 import {FaLocationArrow, FaBriefcase, FaCalendarAlt} from "react-icons/fa";
-import {Link, Form} from "react-router-dom";
-import {type Job} from "../types";
+import {Link, Form, useOutletContext} from "react-router-dom";
+import {User, type Job} from "../types";
 
 import Wrapper from "../assets/wrappers/Job";
 import JobInfo from "./JobInfo";
 import day from "dayjs";
+import {toast} from "react-toastify";
 
 const Job = ({_id, position, company, jobStatus, jobType, jobLocation, createdAt}: Job) => {
   const date = day(createdAt).format("MMM D[th], YYYY");
+  const {user} = useOutletContext() as {user: User};
+
+  const handleDelete = (e: React.FormEvent) => {
+    if (user.email === "demouser@example.io") {
+      e.preventDefault();
+      toast.error("Demo User. Read Only!");
+      return;
+    }
+  };
 
   return (
     <Wrapper>
@@ -29,7 +39,7 @@ const Job = ({_id, position, company, jobStatus, jobType, jobLocation, createdAt
           <Link to={`/dashboard/edit-job/${_id}`} className='btn edit-btn'>
             Edit
           </Link>
-          <Form method='post' action={`/dashboard/delete-job/${_id}`}>
+          <Form method='post' action={`../delete-job/${_id}`} onClick={handleDelete}>
             <button type='submit' className='btn delete-btn'>
               Delete
             </button>
