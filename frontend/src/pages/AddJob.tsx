@@ -7,7 +7,8 @@ import {JOB_STATUS, JOB_TYPE} from "../../../utils/constants";
 import Wrapper from "../assets/wrappers/DashboardFormPage";
 
 const AddJob = () => {
-  const user = useOutletContext<User>();
+  const {user} = useOutletContext() as {user: User};
+  const {location} = user;
 
   return (
     <Wrapper>
@@ -25,7 +26,7 @@ const AddJob = () => {
             type='text'
             name='jobLocation'
             labelText='Job Location'
-            defaultValue={user.location}
+            defaultValue={location}
           />
           <FormRowSelect
             name='jobStatus'
