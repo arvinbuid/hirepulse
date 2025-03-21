@@ -1,6 +1,6 @@
 import {Request, Response, NextFunction} from "express";
 
-import {UnauthenticatedError} from "../errors/customErrors.ts";
+import {UnauthenticatedError, UnauthorizedError} from "../errors/customErrors.ts";
 import {verifyJWT} from "../utils/tokenUtils.ts";
 
 export const authenticateUser = (req: Request, res: Response, next: NextFunction) => {
@@ -12,7 +12,8 @@ export const authenticateUser = (req: Request, res: Response, next: NextFunction
 
   try {
     const {userId, role} = verifyJWT(token);
-    req.user = {userId, role};
+    const demo = userId === "67dd3e6e5687f1fbdfb55840";
+    req.user = {userId, role, demo};
     next();
   } catch (error) {
     throw new UnauthenticatedError("authentication invalid.");
@@ -26,4 +27,9 @@ export const authorizePermissions = (...roles: string[]) => {
     }
     next();
   };
+};
+
+export const checkForDemoUser = (req: Request, res: Response, next: NextFunction) => {
+  if (req.user?.demo) throw new UnauthorizedError("Demo User. Read Only!");
+  next();
 };

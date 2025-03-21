@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import {IJob} from "./models/JobModel.ts";
 
 declare global {
@@ -7,6 +8,7 @@ declare global {
       user?: {
         userId: string;
         role: string;
+        demo: boolean;
       };
     }
   }

@@ -1,4 +1,4 @@
-import {authorizePermissions} from "./../middleware/auth.ts";
+import {authorizePermissions, checkForDemoUser} from "./../middleware/auth.ts";
 import {Router} from "express";
 
 import {getApplicationStats, getCurrentUser, updateUser} from "../controllers/userController.ts";
@@ -11,6 +11,12 @@ router.get("/current-user", getCurrentUser);
 
 router.get("/admin/app-stats", authorizePermissions("admin"), getApplicationStats);
 
-router.patch("/update-user", upload.single("avatar"), validateUpdateUserInput, updateUser);
+router.patch(
+  "/update-user",
+  checkForDemoUser,
+  upload.single("avatar"),
+  validateUpdateUserInput,
+  updateUser
+);
 
 export default router;
