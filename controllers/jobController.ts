@@ -38,3 +38,27 @@ export const deleteJob = async (req: Request, res: Response) => {
 
   res.status(StatusCodes.NO_CONTENT).json({message: "Job deleted"});
 };
+
+export const getStats = (req: Request, res: Response) => {
+  const defaultStats = {
+    pending: 22,
+    interview: 12,
+    declined: 5,
+  };
+  let monthlyApplications = [
+    {
+      date: "April 22",
+      count: 12,
+    },
+    {
+      date: "May 22",
+      count: 9,
+    },
+    {
+      date: "June 22",
+      count: 3,
+    },
+  ];
+
+  res.status(StatusCodes.OK).json({defaultStats, monthlyApplications});
+};

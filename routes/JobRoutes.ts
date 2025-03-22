@@ -5,12 +5,15 @@ import {
   postCreateJob,
   updateJob,
   deleteJob,
+  getStats,
 } from "../controllers/jobController.ts";
 
 import {validateJobInput, validateParamId} from "../middleware/validation.ts";
 import {checkForDemoUser} from "../middleware/auth.ts";
 
 const router = Router();
+
+router.get("/stats", getStats);
 
 router.get("/", getAllJobs);
 
