@@ -4,6 +4,7 @@ import {StatusCodes} from "http-status-codes";
 
 import Job from "../models/JobModel.ts";
 import mongoose from "mongoose";
+import dayjs from "dayjs";
 
 export const getAllJobs = async (req: Request, res: Response) => {
   const jobs = await Job.find({createdBy: req.user?.userId});
@@ -62,5 +63,37 @@ export const getStats = async (req: Request, res: Response) => {
     declined: statsObj.declined || 0,
   };
 
-  res.status(StatusCodes.OK).json({defaultStats});
+  let monthlyApplications = await Job.aggregate([
+    {$match: {createdBy: new mongoose.Types.ObjectId(req.user?.userId)}},
+    {
+      $group: {
+        _id: {year: {$year: "$createdAt"}, month: {$month: "$createdAt"}},
+        count: {$sum: 1},
+      },
+    },
+    {
+      $sort: {"_id.year": -1, "_id.month": -1},
+    },
+    {
+      $limit: 6,
+    },
+  ]);
+
+  monthlyApplications = monthlyApplications
+    .map((i) => {
+      const {
+        _id: {year, month},
+        count,
+      } = i;
+      // format year & month
+      const date = dayjs()
+        .month(month - 1)
+        .year(year)
+        .format("MMM YY");
+
+      return {date, count};
+    })
+    .reverse();
+
+  res.status(StatusCodes.OK).json({defaultStats, monthlyApplications});
 };
