@@ -3,6 +3,7 @@ import {Request, Response, NextFunction} from "express";
 import {StatusCodes} from "http-status-codes";
 
 import Job from "../models/JobModel.ts";
+import mongoose from "mongoose";
 
 export const getAllJobs = async (req: Request, res: Response) => {
   const jobs = await Job.find({createdBy: req.user?.userId});
@@ -39,26 +40,27 @@ export const deleteJob = async (req: Request, res: Response) => {
   res.status(StatusCodes.NO_CONTENT).json({message: "Job deleted"});
 };
 
-export const getStats = (req: Request, res: Response) => {
-  const defaultStats = {
-    pending: 22,
-    interview: 12,
-    declined: 5,
-  };
-  let monthlyApplications = [
-    {
-      date: "April 22",
-      count: 12,
-    },
-    {
-      date: "May 22",
-      count: 9,
-    },
-    {
-      date: "June 22",
-      count: 3,
-    },
-  ];
+export const getStats = async (req: Request, res: Response) => {
+  const stats = await Job.aggregate([
+    {$match: {createdBy: new mongoose.Types.ObjectId(req.user?.userId)}},
+    {$group: {_id: "$jobStatus", count: {$sum: 1}}},
+  ]);
 
-  res.status(StatusCodes.OK).json({defaultStats, monthlyApplications});
+  interface Stats {
+    [key: string]: number;
+  }
+
+  const statsObj = stats.reduce<Stats>((acc, curr) => {
+    const {_id: title, count} = curr;
+    acc[title] = count;
+    return acc;
+  }, {});
+
+  const defaultStats = {
+    pending: statsObj.pending || 0,
+    interview: statsObj.interview || 0,
+    declined: statsObj.declined || 0,
+  };
+
+  res.status(StatusCodes.OK).json({defaultStats});
 };
