@@ -1,5 +1,5 @@
 const AreaChart = () => {
-  return <div></div>;
+  return <div>Area Chart</div>;
 };
 
 export default AreaChart;
