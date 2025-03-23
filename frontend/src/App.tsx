@@ -26,6 +26,7 @@ import {loader as dashboardLoader} from "./loaders/dashboardLoader";
 import {loader as allJobsLoader} from "./loaders/allJobsLoader";
 import {loader as editJobLoader} from "./loaders/editJobLoader";
 import {loader as adminLoader} from "./loaders/adminLoader";
+import {loader as statsLoader} from "./loaders/statsLoader";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +61,7 @@ const router = createBrowserRouter([
           {
             path: "stats",
             element: <Stats />,
+            loader: statsLoader,
           },
           {
             path: "all-jobs",
