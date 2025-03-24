@@ -10,7 +10,7 @@ export const loader = async ({request}: LoaderFunctionArgs) => {
       params,
     });
 
-    return {data};
+    return {data, searchValues: {...params}};
   } catch (error) {
     return error;
   }

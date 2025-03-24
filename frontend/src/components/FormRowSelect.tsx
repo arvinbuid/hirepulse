@@ -1,3 +1,4 @@
+import {ChangeEvent} from "react";
 import {JOB_STATUS} from "../../../utils/constants";
 
 interface FormRowSelectProps {
@@ -5,9 +6,16 @@ interface FormRowSelectProps {
   list: string[];
   labelText: string;
   defaultValue?: (typeof JOB_STATUS)[keyof typeof JOB_STATUS];
+  onChange?: (e: ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const FormRowSelect = ({name, labelText, list, defaultValue = ""}: FormRowSelectProps) => {
+const FormRowSelect = ({
+  name,
+  labelText,
+  list,
+  defaultValue = "",
+  onChange,
+}: FormRowSelectProps) => {
   return (
     <div className='form-row'>
       <label htmlFor={name} className='form-label'>
@@ -19,6 +27,7 @@ const FormRowSelect = ({name, labelText, list, defaultValue = ""}: FormRowSelect
         className='form-select'
         defaultValue={defaultValue}
         autoComplete='on'
+        onChange={onChange}
       >
         {list.map((status) => {
           return (
