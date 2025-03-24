@@ -7,10 +7,12 @@ import mongoose from "mongoose";
 import dayjs from "dayjs";
 
 export const getAllJobs = async (req: Request, res: Response) => {
-  const {search} = req.query;
+  const {search, jobStatus, jobType} = req.query;
 
   interface JobQuery {
     createdBy: string | undefined;
+    jobStatus?: string;
+    jobType?: string;
     $or?: Array<{
       position: {$regex: string | RegExp; $options: string};
       company: {$regex: string | RegExp; $options: string};
@@ -27,6 +29,16 @@ export const getAllJobs = async (req: Request, res: Response) => {
         company: {$regex: search as string, $options: "i"},
       },
     ];
+  }
+
+  // Add jobStatus to query if condition is true
+  if (jobStatus && jobStatus !== "all") {
+    queryObj.jobStatus = jobStatus as string;
+  }
+
+  // Add jobType to query if condition is true
+  if (jobType && jobType !== "all") {
+    queryObj.jobType = jobType as string;
   }
 
   const jobs = await Job.find(queryObj);
