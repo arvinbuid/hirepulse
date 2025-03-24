@@ -7,7 +7,29 @@ import mongoose from "mongoose";
 import dayjs from "dayjs";
 
 export const getAllJobs = async (req: Request, res: Response) => {
-  const jobs = await Job.find({createdBy: req.user?.userId});
+  const {search} = req.query;
+
+  interface JobQuery {
+    createdBy: string | undefined;
+    $or?: Array<{
+      position: {$regex: string | RegExp; $options: string};
+      company: {$regex: string | RegExp; $options: string};
+    }>;
+  }
+
+  const queryObj: JobQuery = {createdBy: req.user?.userId};
+
+  // Accept query like ?search=a
+  if (search) {
+    queryObj.$or = [
+      {
+        position: {$regex: search as string, $options: "i"},
+        company: {$regex: search as string, $options: "i"},
+      },
+    ];
+  }
+
+  const jobs = await Job.find(queryObj);
 
   res.status(StatusCodes.OK).json({jobs});
 };
