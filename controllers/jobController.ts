@@ -7,12 +7,13 @@ import mongoose from "mongoose";
 import dayjs from "dayjs";
 
 export const getAllJobs = async (req: Request, res: Response) => {
-  const {search, jobStatus, jobType} = req.query;
+  const {search, jobStatus, jobType, sort} = req.query;
 
   interface JobQuery {
     createdBy: string | undefined;
     jobStatus?: string;
     jobType?: string;
+    sort?: string;
     $or?: Array<{
       position: {$regex: string | RegExp; $options: string};
       company: {$regex: string | RegExp; $options: string};
@@ -41,7 +42,22 @@ export const getAllJobs = async (req: Request, res: Response) => {
     queryObj.jobType = jobType as string;
   }
 
-  const jobs = await Job.find(queryObj);
+  const sortOptions = {
+    newest: "-createdAt",
+    oldest: "createdAt",
+    "a-z": "position",
+    "z-a": "-position",
+  };
+
+  // Define the type for valid sort keys
+  type SortKey = keyof typeof sortOptions; // = "newest" | "oldest" | "a-z" | "z-a"
+
+  // Check if provided sort parameter is a valid key
+  const sortKey = Object.keys(sortOptions).includes(sort as string)
+    ? sortOptions[sort as SortKey]
+    : sortOptions.newest;
+
+  const jobs = await Job.find(queryObj).sort(sortKey);
 
   res.status(StatusCodes.OK).json({jobs});
 };
