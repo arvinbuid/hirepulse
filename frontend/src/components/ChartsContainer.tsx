@@ -13,11 +13,11 @@ const ChartsContainer = ({data}: ChartsContainerProps) => {
 
   return (
     <Wrapper>
-      <h3>Monthly Application</h3>
+      <h4>Monthly Application</h4>
       <button type='button' onClick={() => setBarChart(!barChart)}>
         {barChart ? "Bar Chart" : "Area Chart"}
       </button>
-      {barChart ? <BarChart data={data} /> : <AreaChart />}
+      {barChart ? <BarChart data={data} /> : <AreaChart data={data} />}
     </Wrapper>
   );
 };
