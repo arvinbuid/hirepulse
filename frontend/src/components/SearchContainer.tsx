@@ -8,10 +8,24 @@ import FormRowSelect from "./FormRowSelect";
 // import SubmitBtn from "./SubmitBtn";
 
 const SearchContainer = () => {
+  const submit = useSubmit();
   const {searchValues} = useAllJobsContext();
   const {search, jobStatus, jobType, sort} = searchValues;
 
-  const submit = useSubmit();
+  const debounce = (onChange: (form: HTMLFormElement) => void) => {
+    let timeout: NodeJS.Timeout;
+
+    return (e: React.FormEvent<HTMLInputElement>) => {
+      const form = e.currentTarget.form;
+      if (!form) return;
+
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        onChange(form);
+      }, 300);
+    };
+  };
+
   return (
     <Wrapper>
       <Form method='get' className='form'>
@@ -22,7 +36,7 @@ const SearchContainer = () => {
             name='search'
             labelText='Search'
             defaultValue={search}
-            onChange={(e) => submit(e.currentTarget.form)}
+            onChange={debounce((form) => submit(form))}
           />
 
           <FormRowSelect
