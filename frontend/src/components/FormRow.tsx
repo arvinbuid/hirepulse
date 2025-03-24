@@ -3,7 +3,7 @@ import {ChangeEvent} from "react";
 interface FormRowProps {
   name: string;
   type: string;
-  labelText: string;
+  labelText?: string;
   defaultValue?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
