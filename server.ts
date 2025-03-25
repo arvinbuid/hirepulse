@@ -33,11 +33,6 @@ const app = express();
 
 app.use(express.static(path.resolve(__dirname, "./public")));
 
-// Serve static files in production environment
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.resolve(__dirname, "dist", "public")));
-}
-
 app.use(express.json());
 app.use(cookieParser());
 
@@ -53,11 +48,6 @@ app.use("/api/v1/auth", authRoutes);
 app.get("*", (req: Request, res: Response) => {
   res.sendFile(path.resolve(__dirname, "./public", "index.html"));
 });
-
-// Serve public files in production environment
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.resolve(__dirname, "dist", "public", "index.html")));
-}
 
 // Not found route
 app.use("*", (req: Request, res: Response) => {

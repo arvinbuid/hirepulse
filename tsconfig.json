@@ -2,7 +2,7 @@
   "compilerOptions": {
     "module": "ESNext",
     "target": "ES2022",
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "outDir": "./dist",
@@ -10,8 +10,7 @@
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "jsx": "react-jsx",
-    "allowJs": true
+    "jsx": "react-jsx"
   },
   "include": ["./**/*.ts"],
   "exclude": ["node_modules"]
