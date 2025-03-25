@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import "./types";
-import express from "express";
+import express, {Request, Response} from "express";
 import morgan from "morgan";
 import mongoose from "mongoose";
 import {v2 as cloudinary} from "cloudinary";
@@ -44,8 +44,12 @@ app.use("/api/v1/jobs", authenticateUser, jobRoutes);
 app.use("/api/v1/users", authenticateUser, userRoutes);
 app.use("/api/v1/auth", authRoutes);
 
+app.get("*", (req: Request, res: Response) => {
+  res.sendFile(path.resolve(__dirname, "./public", "index.html"));
+});
+
 // Not found route
-app.use("*", (req, res) => {
+app.use("*", (req: Request, res: Response) => {
   res.status(404).json({message: "Not found."});
 });
 
