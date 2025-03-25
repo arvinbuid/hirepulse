@@ -12,7 +12,7 @@ export interface SearchValues {
 }
 
 interface allJobsLoaderData {
-  data: {jobs: Job[]};
+  data: {jobs: Job[]; totalJobs: number; numOfPages: number; currentPage: number};
   searchValues: SearchValues;
 }
 const AllJobs = () => {

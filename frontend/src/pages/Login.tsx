@@ -1,4 +1,4 @@
-import {Form, Link, redirect, useNavigate} from "react-router-dom";
+import {Form, Link, useNavigate} from "react-router-dom";
 import {FormRow, Logo, SubmitBtn} from "../components";
 import {toast} from "react-toastify";
 import {AxiosError} from "axios";
@@ -30,8 +30,8 @@ const Login = () => {
       <Form method='post' className='form'>
         <Logo />
         <h4>Login</h4>
-        <FormRow type='email' name='email' labelText='Email' defaultValue='johndoe@example.io' />
-        <FormRow type='password' name='password' labelText='Password' defaultValue='123456' />
+        <FormRow type='email' name='email' labelText='Email' />
+        <FormRow type='password' name='password' labelText='Password' />
         <SubmitBtn />
         <button type='button' className='btn btn-block' onClick={loginDemoUser}>
           Explore the App

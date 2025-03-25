@@ -1,4 +1,4 @@
-import {Link, useRouteError, isRouteErrorResponse, useNavigate} from "react-router-dom";
+import {useRouteError, isRouteErrorResponse, useNavigate} from "react-router-dom";
 import Wrapper from "../assets/wrappers/ErrorPage";
 import NotFound from "../assets/images/not-found.svg";
 

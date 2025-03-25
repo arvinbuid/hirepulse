@@ -8,11 +8,11 @@ const Register = () => {
       <Form method='post' className='form'>
         <Logo />
         <h4>Register</h4>
-        <FormRow type='text' name='name' labelText='First Name' defaultValue='John' />
-        <FormRow type='text' name='lastName' labelText='Last Name' defaultValue='Doe' />
-        <FormRow type='text' name='location' labelText='Location' defaultValue='Philippines' />
-        <FormRow type='email' name='email' labelText='Email' defaultValue='johndoe@example.io' />
-        <FormRow type='password' name='password' labelText='Password' defaultValue='123456' />
+        <FormRow type='text' name='name' labelText='First Name' />
+        <FormRow type='text' name='lastName' labelText='Last Name' />
+        <FormRow type='text' name='location' labelText='Location' />
+        <FormRow type='email' name='email' labelText='Email' />
+        <FormRow type='password' name='password' labelText='Password' />
         <SubmitBtn />
         <p>
           Already a member?

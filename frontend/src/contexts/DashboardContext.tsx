@@ -16,6 +16,7 @@ const isDarkThemeEnabled = checkDarkTheme(); //
 
 export const DashboardProvider: React.FC<DashboardProviderProps> = ({children, currentUser}) => {
   const navigate = useNavigate();
+  // @ts-expect-error: setUser is not used
   const [user, setUser] = useState(currentUser);
   const [showSidebar, setShowSidebar] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(isDarkThemeEnabled);
