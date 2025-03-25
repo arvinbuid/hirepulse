@@ -5,13 +5,13 @@ import morgan from "morgan";
 import mongoose from "mongoose";
 import {v2 as cloudinary} from "cloudinary";
 
-import jobRoutes from "./routes/JobRoutes.ts";
-import authRoutes from "./routes/authRoutes.ts";
-import userRoutes from "./routes/userRoutes.ts";
+import jobRoutes from "./routes/JobRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 
 // Middlewares
-import errorHandlerMiddleware from "./middleware/errorHandler.ts";
-import {authenticateUser} from "./middleware/auth.ts";
+import errorHandlerMiddleware from "./middleware/errorHandler.js";
+import {authenticateUser} from "./middleware/auth.js";
 import cookieParser from "cookie-parser";
 
 // Public

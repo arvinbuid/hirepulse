@@ -1,6 +1,6 @@
 import {Schema, model} from "mongoose";
 
-import {USER_ROLE} from "../utils/constants.ts";
+import {USER_ROLE} from "../utils/constants.js";
 
 interface IUser {
   name: string;

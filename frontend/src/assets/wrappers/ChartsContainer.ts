@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import * as styled from "styled-components";
 
-const Wrapper = styled.section`
+const Wrapper = styled.default.section`
   margin-top: 4rem;
   text-align: center;
   button {

@@ -3,11 +3,11 @@ import mongoose from "mongoose";
 
 import {Request, Response, NextFunction} from "express";
 import {body, param, ValidationChain, validationResult} from "express-validator";
-import {BadRequestError, NotFoundError, UnauthorizedError} from "../errors/customErrors.ts";
-import {JOB_STATUS, JOB_TYPE} from "../utils/constants.ts";
+import {BadRequestError, NotFoundError, UnauthorizedError} from "../errors/customErrors.js";
+import {JOB_STATUS, JOB_TYPE} from "../utils/constants.js";
 
-import Job from "../models/JobModel.ts";
-import User from "../models/UserModel.ts";
+import Job from "../models/JobModel.js";
+import User from "../models/UserModel.js";
 
 const withValidationErrors = (validateValues: ValidationChain[]) => {
   return [

@@ -6,10 +6,10 @@ import {
   updateJob,
   deleteJob,
   getStats,
-} from "../controllers/jobController.ts";
+} from "../controllers/jobController.js";
 
-import {validateJobInput, validateParamId} from "../middleware/validation.ts";
-import {checkForDemoUser} from "../middleware/auth.ts";
+import {validateJobInput, validateParamId} from "../middleware/validation.js";
+import {checkForDemoUser} from "../middleware/auth.js";
 
 const router = Router();
 

@@ -1,7 +1,7 @@
 import {Request, Response, NextFunction} from "express";
 
-import {UnauthenticatedError, UnauthorizedError} from "../errors/customErrors.ts";
-import {verifyJWT} from "../utils/tokenUtils.ts";
+import {UnauthenticatedError, UnauthorizedError} from "../errors/customErrors.js";
+import {verifyJWT} from "../utils/tokenUtils.js";
 
 export const authenticateUser = (req: Request, res: Response, next: NextFunction) => {
   const {token} = req.cookies;

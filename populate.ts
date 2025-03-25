@@ -4,8 +4,8 @@ import {URL} from "url";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 
-import User from "./models/UserModel.ts";
-import Job from "./models/JobModel.ts";
+import User from "./models/UserModel.js";
+import Job from "./models/JobModel.js";
 
 dotenv.config();
 

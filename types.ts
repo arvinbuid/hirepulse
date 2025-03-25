@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import {IJob} from "./models/JobModel.ts";
+import {IJob} from "./models/JobModel.js";
 
 declare global {
   namespace Express {

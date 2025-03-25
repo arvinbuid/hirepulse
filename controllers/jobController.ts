@@ -2,7 +2,7 @@ import "express-async-errors";
 import {Request, Response, NextFunction} from "express";
 import {StatusCodes} from "http-status-codes";
 
-import Job from "../models/JobModel.ts";
+import Job from "../models/JobModel.js";
 import mongoose from "mongoose";
 import dayjs from "dayjs";
 

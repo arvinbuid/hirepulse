@@ -4,6 +4,7 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
+    "build": "tsc",
     "setup-project": "npm i && cd frontend && npm i",
     "start": "node dist/server.js",
     "server": "nodemon server",

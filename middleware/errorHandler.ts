@@ -1,7 +1,7 @@
 import {Request, Response, NextFunction} from "express";
 
 import {StatusCodes} from "http-status-codes";
-import {BadRequestError} from "../errors/customErrors.ts";
+import {BadRequestError} from "../errors/customErrors.js";
 
 const errorHandlerMiddleware = (
   err: BadRequestError,

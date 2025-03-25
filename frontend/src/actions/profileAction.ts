@@ -2,7 +2,7 @@ import {ActionFunctionArgs} from "react-router-dom";
 import {toast} from "react-toastify";
 import {AxiosError} from "axios";
 
-import customFetch from "../utils/customFetch";
+import customFetch from "../utils/customFetch.js";
 
 export const action = async ({request}: ActionFunctionArgs) => {
   const formData = await request.formData();

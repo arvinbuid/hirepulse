@@ -3,8 +3,8 @@ import {Request, Response} from "express";
 import {v2 as cloudinary} from "cloudinary";
 import {promises as fs} from "fs";
 
-import User from "../models/UserModel.ts";
-import Job from "../models/JobModel.ts";
+import User from "../models/UserModel.js";
+import Job from "../models/JobModel.js";
 
 export const getCurrentUser = async (req: Request, res: Response) => {
   const user = await User.findOne({_id: req.user?.userId}).select("-password");

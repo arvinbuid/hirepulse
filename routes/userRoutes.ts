@@ -1,9 +1,9 @@
-import {authorizePermissions, checkForDemoUser} from "./../middleware/auth.ts";
+import {authorizePermissions, checkForDemoUser} from "./../middleware/auth.js";
 import {Router} from "express";
 
-import {getApplicationStats, getCurrentUser, updateUser} from "../controllers/userController.ts";
-import {validateUpdateUserInput} from "../middleware/validation.ts";
-import upload from "../middleware/multerMiddleware.ts";
+import {getApplicationStats, getCurrentUser, updateUser} from "../controllers/userController.js";
+import {validateUpdateUserInput} from "../middleware/validation.js";
+import upload from "../middleware/multerMiddleware.js";
 
 const router = Router();
 
