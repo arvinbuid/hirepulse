@@ -17,8 +17,7 @@ const isDarkThemeEnabled = checkDarkTheme(); //
 export const DashboardProvider: React.FC<DashboardProviderProps> = ({children, currentUser}) => {
   const navigate = useNavigate();
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [user, setUser] = useState(currentUser);
+  const [user] = useState(currentUser);
   const [showSidebar, setShowSidebar] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(isDarkThemeEnabled);
 
