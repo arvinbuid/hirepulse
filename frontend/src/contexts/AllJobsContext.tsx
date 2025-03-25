@@ -5,7 +5,7 @@ import {Job} from "../types";
 
 interface AllJobsProviderProps {
   children: ReactNode;
-  data: {jobs: Job[]; totalJobs: number; numOfPages: number};
+  data: {jobs: Job[]; totalJobs: number; numOfPages: number; currentPage: number};
   searchValues: SearchValues;
 }
 

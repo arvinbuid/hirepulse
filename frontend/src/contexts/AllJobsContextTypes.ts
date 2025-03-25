@@ -4,7 +4,7 @@ import {SearchValues} from "./../pages/AllJobs";
 import {Job} from "../types";
 
 interface AllJobsContextType {
-  data: {jobs: Job[]; totalJobs: number; numOfPages: number};
+  data: {jobs: Job[]; totalJobs: number; numOfPages: number; currentPage: number};
   searchValues: SearchValues;
 }
 
