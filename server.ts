@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import "./types";
+import "./types.js";
 import express, {Request, Response} from "express";
 import morgan from "morgan";
 import mongoose from "mongoose";
