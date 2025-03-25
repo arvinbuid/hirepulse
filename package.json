@@ -4,8 +4,10 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "build": "tsc",
     "setup-project": "npm i && cd frontend && npm i",
+    "build": "npm run build:server && npm run build:client",
+    "build:server": "tsc",
+    "build:client": "cd frontend && npm run build",
     "start": "node dist/server.js",
     "server": "nodemon server",
     "client": "cd frontend && npm run dev",
