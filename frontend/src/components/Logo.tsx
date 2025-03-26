@@ -12,6 +12,10 @@ const LogoWrapper = styled.div`
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
+
+  @media (max-width: 576px) {
+    display: none;
+  }
 `;
 
 const Logo = () => {
