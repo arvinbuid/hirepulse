@@ -2,6 +2,8 @@
 
 A full stack MERN application for managing and tracking job applications.
 
+<img src="./public/images/project-overview.png" alt="hirepulse" />
+
 ## Features
 
 - Job Listing CRUD
