@@ -16,9 +16,9 @@ const Landing = () => {
             Job <span>tracking</span> app
           </h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat pariatur blanditiis,
-            officia at molestias exercitationem harum nemo quidem excepturi natus explicabo neque id
-            ipsa consequatur, voluptate, a similique culpa voluptates.
+            HirePulse is the ultimate job tracking management platform designed to transform the way
+            you navigate your professional landscape. Say goodbye to scattered job applications and
+            hello to strategic career planning.
           </p>
           <Link to='/register' className='btn register-link'>
             Register
